@@ -29,7 +29,7 @@ on init
     chown oem_2997 oem_2997 /dev/block/sda1
     chmod 0770 /dev/block/sda1
     class_start trimarea
-    exec system -- /vendor/bin/wait4tad
+    exec -- /vendor/bin/wait4tad
 
     # These are needed for MiscTA HIDL service
     start hwservicemanager
@@ -136,7 +136,7 @@ on post-fs
     write /sys/block/dm-0/queue/read_ahead_kb 2048
 
     # SONY: Switch the modem if needed
-    exec u:r:modem-switcher:s0 root root system oem_2993 cache -- /system/bin/sony-modem-switcher
+    exec -- /system/bin/sony-modem-switcher
 
     # Update dm-verity state and set partition.*.verified properties
     verity_update_state
@@ -266,9 +266,9 @@ service tad /vendor/bin/tad /dev/block/bootdevice/by-name/TA 0,16
     class trimarea
 
 # create directory for wfd
-    mkdir /data/vendor/wfd 0770 system system
 
 on post-fs-data
+    mkdir /data/vendor/wfd 0770 system system
 
 on property:sys.user.0.ce_available=true
     # Remounting partitions here just in case vold restarts

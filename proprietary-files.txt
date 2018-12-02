@@ -1,6 +1,25 @@
 # Camera
+bin/cacaoserver
+etc/init/cacaoserver.rc
+lib/libcacao_client.so
+lib/libcacao_pal.so
+lib/libcacao_process_ctrl_gateway.so
+lib/libcacao_service.so
+lib/vendor.somc.hardware.camera.cacao@1.0.so
+lib/vendor.somc.hardware.camera.cacao@2.0.so
+lib/vendor.somc.hardware.camera.cacao@3.0.so
+lib/vendor.somc.hardware.camera.cacao@3.1.so
+lib/vendor.somc.hardware.camera.provider@1.0.so
+lib/vendor.somc.hardware.camera.device@1.0.so
+lib64/libcacao_client.so
+lib64/libcacao_pal.so
+vendor/bin/hw/vendor.somc.hardware.camera.provider@1.0-service
+vendor/etc/flashled_calc_parameters.cfg
 vendor/etc/camera/camera_config.xml
+vendor/etc/init/vendor.somc.hardware.camera.provider@1.0-service.rc
 vendor/lib/hw/camera.msm8998.so
+vendor/lib/libcacao_common.so
+vendor/lib/libcacao_process_ctrl.so
 vendor/lib/libcameralight.so
 vendor/lib/libcammw.so
 vendor/lib/libcammw_util.so
@@ -17,7 +36,6 @@ vendor/lib/libmmcamera2_mct_shimlayer.so
 vendor/lib/libmmjpeg_interface.so
 vendor/lib/libmmlib2d_interface.so
 vendor/lib/libqomx_core.so
-vendor/lib/libsensorndkbridge.so
 vendor/lib/libsomc_alfortlpserv.so
 vendor/lib/libsomc_alfortlp.so
 vendor/lib/libsomc_alfortrsc.so
@@ -56,6 +74,10 @@ vendor/lib/libsomc_topporsc.so
 vendor/lib/libsomc_toppo.so
 vendor/lib/libsomc_yummyrsc.so
 vendor/lib/libsomc_yummy.so
+vendor/lib/vendor.somc.camera.device@3.2-impl.so
+vendor/lib/vendor.somc.camera.device@3.3-impl.so
+vendor/lib/vendor.somc.camera.device@3.4-impl.so
+vendor/lib/vendor.somc.hardware.camera.cacao@3.0-impl.so
 
 # Camera actuators
 
@@ -442,6 +464,8 @@ vendor/etc/sensors/sensor_def_somc_product.conf
 vendor/etc/sensors/sensor_def_somc_platform.conf
 
 # SOMC: idd
+bin/idds
+etc/init/idds.rc
 lib/libidd-plat.so
 lib/vendor.semc.system.idd@1.0.so
 lib64/libidd-plat.so
@@ -461,9 +485,12 @@ vendor/lib64/libprotobuf-c-idd.so
 # SOMC: secd
 lib/vendor.somc.hardware.security.secd@1.0.so
 lib64/vendor.somc.hardware.security.secd@1.0.so
+lib64/libdevice_security_client.so
 vendor/bin/hw/vendor.semc.hardware.secd@1.0-service
 vendor/etc/init/vendor.semc.hardware.secd@1.0-service.rc
+vendor/lib/libdevice_security_vendor.so
 vendor/lib/libprotobuf-c.so
+vendor/lib64/libdevice_security_vendor.so
 vendor/lib64/libprotobuf-c.so
 
 # SOMC: TA daemon / MiscTA
@@ -487,6 +514,7 @@ vendor/bin/tad
 vendor/bin/taimport_vendor
 vendor/bin/ta_qmi_service
 vendor/bin/wait4tad
+vendor/etc/init/vendor.somc.hardware.miscta@1.0-service.rc
 vendor/lib/libmiscta.so
 vendor/lib/libta.so
 vendor/lib64/libmiscta.so

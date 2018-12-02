@@ -222,6 +222,7 @@ vendor/lib64/libSecureUILib.so
 vendor/lib64/libStDrvInt.so
 vendor/lib64/libdrmfs.so
 vendor/lib64/libdrmtime.so
+vendor/lib64/liboemcrypto.so
 vendor/lib64/libqisl.so
 vendor/lib64/librpmb.so
 vendor/lib64/libsecureui.so
@@ -579,6 +580,7 @@ etc/permissions/com.qualcomm.qti.imscmservice.xml
 framework/com.qualcomm.qti.imscmservice-V2.0-java.jar
 framework/com.qualcomm.qti.imscmservice-V2.1-java.jar
 framework/com.qualcomm.qti.uceservice-V2.0-java.jar
+framework/vendor.qti.ims.callinfo-V1.0-java.jar
 framework/vendor.qti.ims.rcsconfig-V1.0-java.jar
 lib/com.qualcomm.qti.imscmservice@1.0.so
 lib/com.qualcomm.qti.imscmservice@2.0.so
@@ -598,6 +600,7 @@ lib/vendor.qti.hardware.radio.ims@1.1.so
 lib/vendor.qti.hardware.radio.ims@1.2.so
 lib/vendor.qti.hardware.radio.ims@1.3.so
 lib/vendor.qti.hardware.radio.ims@1.4.so
+lib/vendor.qti.ims.callinfo@1.0.so
 lib/vendor.qti.ims.rcsconfig@1.0.so
 lib/vendor.qti.imsrtpservice@1.0.so
 lib64/com.qualcomm.qti.imscmservice@1.0.so
@@ -619,6 +622,7 @@ lib64/vendor.qti.hardware.radio.ims@1.1.so
 lib64/vendor.qti.hardware.radio.ims@1.2.so
 lib64/vendor.qti.hardware.radio.ims@1.3.so
 lib64/vendor.qti.hardware.radio.ims@1.4.so
+lib64/vendor.qti.ims.callinfo@1.0.so
 lib64/vendor.qti.ims.rcsconfig@1.0.so
 lib64/vendor.qti.imsrtpservice@1.0.so
 vendor/bin/ims_rtp_daemon
