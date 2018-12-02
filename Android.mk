@@ -105,6 +105,12 @@ $(BT_FIRMWARE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@rm -rf $@
 	$(hide) ln -sf /bt_firmware/image/$(notdir $@) $@
 
-ALL_DEFAULT_INSTALLED_MODULES += $(BT_FIRMWARE_SYMLINKS)
+VENDOR_EXTRA_FOLDERS := firmware_mnt bt_firmware dsp
+VENDOR_EXTRA_FOLDERS_PATHS := $(addprefix $(TARGET_OUT_VENDOR)/,$(VENDOR_EXTRA_FOLDERS))
+$(VENDOR_EXTRA_FOLDERS_PATHS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Creating extra vendor folder: $@"
+	@mkdir -p $(dir $@)
+
+ALL_DEFAULT_INSTALLED_MODULES += $(VENDOR_EXTRA_FOLDERS_PATHS)
 
 endif
