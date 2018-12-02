@@ -707,6 +707,7 @@ lib64/vendor.qti.voiceprint@1.0.so
 framework/vendor.qti.voiceprint-V1.0-java.jar
 
 # Widevine
+vendor/bin/wvkbd
 vendor/bin/hw/android.hardware.drm@1.1-service.widevine
 vendor/etc/init/android.hardware.drm@1.1-service.widevine.rc
 vendor/lib/libcppf.so
