@@ -145,7 +145,8 @@ PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
     vendor.qti.hardware.camera.device@1.0 \
-    vendor.qti.hardware.camera.device@1.0_vendor
+    vendor.qti.hardware.camera.device@1.0_vendor \
+    libsensorndkbridge
 
 PRODUCT_PACKAGES += \
     Snap
@@ -162,6 +163,7 @@ PRODUCT_PACKAGES += \
 
 # Display
 PRODUCT_PACKAGES += \
+    android.frameworks.displayservice@1.0:32 \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-impl \
@@ -295,6 +297,10 @@ PRODUCT_PACKAGES += \
     libregistermsext \
     mediametrics
 
+# Media codecs
+PRODUCT_PACKAGES += \
+    libstagefright_ccodec
+
 # Netutils
 PRODUCT_PACKAGES += \
     android.system.net.netd@1.0 \
@@ -353,6 +359,7 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
+    android.hardware.radio.config@1.0-service \
     ims-ext-common \
     librmnetctl \
     libxml2 \
