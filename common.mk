@@ -392,6 +392,11 @@ PRODUCT_PACKAGES += \
     android.hardware.thermal@1.0-service \
     thermal.msm8998
 
+# Touchscreen & camera button
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/input/clearpad.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/clearpad.idc \
+    $(LOCAL_PATH)/input/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl
+
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service \
