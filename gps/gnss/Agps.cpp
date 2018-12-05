@@ -30,7 +30,7 @@
 #define LOG_TAG "LocSvc_Agps"
 
 #include <Agps.h>
-#include <platform_lib_includes.h>
+#include <loc_pla.h>
 #include <ContextBase.h>
 #include <loc_timer.h>
 
@@ -205,7 +205,10 @@ void AgpsStateMachine::processAgpsEventReleased(){
     switch (mState) {
 
         case AGPS_STATE_RELEASED:
-            LOC_LOGE("Unexpected event RELEASED in state %d", mState);
+            /* Subscriber list should be empty if we are in released state */
+            if (!mSubscriberList.empty()) {
+                LOC_LOGE("Unexpected event RELEASED in RELEASED state");
+            }
             break;
 
         case AGPS_STATE_ACQUIRED:
@@ -292,19 +295,18 @@ void AgpsStateMachine::processAgpsEventDenied(){
  *      false = Release data connection */
 int AgpsStateMachine::requestOrReleaseDataConn(bool request){
 
-    AgpsFrameworkInterface::AGnssStatusIpV4 nifRequest;
+    AGnssExtStatusIpV4 nifRequest;
     memset(&nifRequest, 0, sizeof(nifRequest));
 
-    nifRequest.type = (AgpsFrameworkInterface::AGnssType)mAgpsType;
+    nifRequest.type = mAgpsType;
 
     if (request) {
         LOC_LOGD("AGPS Data Conn Request");
-        nifRequest.status = (AgpsFrameworkInterface::AGnssStatusValue)
-                                LOC_GPS_REQUEST_AGPS_DATA_CONN;
-    } else {
+        nifRequest.status = LOC_GPS_REQUEST_AGPS_DATA_CONN;
+    }
+    else{
         LOC_LOGD("AGPS Data Conn Release");
-        nifRequest.status = (AgpsFrameworkInterface::AGnssStatusValue)
-                                LOC_GPS_RELEASE_AGPS_DATA_CONN;
+        nifRequest.status = LOC_GPS_RELEASE_AGPS_DATA_CONN;
     }
 
     mAgpsManager->mFrameworkStatusV4Cb(nifRequest);
@@ -459,9 +461,11 @@ void AgpsStateMachine::setAPN(char* apn, unsigned int len){
 
     if (NULL != apn) {
         mAPN = new char[len+1];
-        memcpy(mAPN, apn, len);
-        mAPN[len] = '\0';
-        mAPNLen = len;
+        if (NULL != mAPN) {
+            memcpy(mAPN, apn, len);
+            mAPN[len] = '\0';
+            mAPNLen = len;
+        }
     }
 }
 
@@ -845,31 +849,14 @@ void AgpsManager::reportDataCallClosed(){
 
 void AgpsManager::reportAtlOpenSuccess(
         AGpsExtType agpsType, char* apnName, int apnLen,
-        LocApnIpType ipType){
+        AGpsBearerType bearerType){
 
     LOC_LOGD("AgpsManager::reportAtlOpenSuccess(): "
-             "AgpsType %d, APN [%s], Len %d, IPType %d",
-             agpsType, apnName, apnLen, ipType);
+             "AgpsType %d, APN [%s], Len %d, BearerType %d",
+             agpsType, apnName, apnLen, bearerType);
 
     /* Find the state machine instance */
     AgpsStateMachine* sm = getAgpsStateMachine(agpsType);
-
-    /* Convert LocApnIpType sent by framework to AGpsBearerType */
-    AGpsBearerType bearerType;
-    switch (ipType) {
-        case LOC_APN_IP_IPV4:
-            bearerType = AGPS_APN_BEARER_IPV4;
-            break;
-        case LOC_APN_IP_IPV6:
-            bearerType = AGPS_APN_BEARER_IPV6;
-            break;
-        case LOC_APN_IP_IPV4V6:
-            bearerType = AGPS_APN_BEARER_IPV4V6;
-            break;
-        default:
-            bearerType = AGPS_APN_BEARER_IPV4;
-            break;
-    }
 
     /* Set bearer and apn info in state machine instance */
     sm->setBearer(bearerType);
@@ -921,41 +908,5 @@ void AgpsManager::handleModemSSR(){
         mDSClientReleaseFn();
 
         mDSClientInitFn(true);
-    }
-}
-
-AGpsBearerType AgpsUtils::ipTypeToBearerType(LocApnIpType ipType) {
-
-    switch (ipType) {
-
-        case LOC_APN_IP_IPV4:
-            return AGPS_APN_BEARER_IPV4;
-
-        case LOC_APN_IP_IPV6:
-            return AGPS_APN_BEARER_IPV6;
-
-        case LOC_APN_IP_IPV4V6:
-            return AGPS_APN_BEARER_IPV4V6;
-
-        default:
-            return AGPS_APN_BEARER_IPV4;
-    }
-}
-
-LocApnIpType AgpsUtils::bearerTypeToIpType(AGpsBearerType bearerType){
-
-    switch (bearerType) {
-
-        case AGPS_APN_BEARER_IPV4:
-            return LOC_APN_IP_IPV4;
-
-        case AGPS_APN_BEARER_IPV6:
-            return LOC_APN_IP_IPV6;
-
-        case AGPS_APN_BEARER_IPV4V6:
-            return LOC_APN_IP_IPV4V6;
-
-        default:
-            return LOC_APN_IP_IPV4;
     }
 }

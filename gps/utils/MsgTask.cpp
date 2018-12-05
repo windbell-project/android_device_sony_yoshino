@@ -26,14 +26,15 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-#define LOG_NDDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "LocSvc_MsgTask"
 
 #include <unistd.h>
 #include <MsgTask.h>
 #include <msg_q.h>
+#include <log_util.h>
 #include <loc_log.h>
-#include <platform_lib_includes.h>
+#include <loc_pla.h>
 
 static void LocMsgDestroy(void* msg) {
     delete (LocMsg*)msg;
@@ -73,16 +74,19 @@ void MsgTask::destroy() {
 }
 
 void MsgTask::sendMsg(const LocMsg* msg) const {
-    msg_q_snd((void*)mQ, (void*)msg, LocMsgDestroy);
+    if (msg) {
+        msg_q_snd((void*)mQ, (void*)msg, LocMsgDestroy);
+    } else {
+        LOC_LOGE("%s: msg is NULL", __func__);
+    }
 }
 
 void MsgTask::prerun() {
     // make sure we do not run in background scheduling group
-     platform_lib_abstraction_set_sched_policy(platform_lib_abstraction_gettid(), PLA_SP_FOREGROUND);
+     set_sched_policy(gettid(), SP_FOREGROUND);
 }
 
 bool MsgTask::run() {
-    //LOC_LOGV("MsgTask::loop() listening ...\n");
     LocMsg* msg;
     msq_q_err_type result = msg_q_rcv((void*)mQ, (void **)&msg);
     if (eMSG_Q_SUCCESS != result) {

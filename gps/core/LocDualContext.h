@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2014, 2016-2017 The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2014, 2017 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -33,11 +33,8 @@
 #include <ctype.h>
 #include <dlfcn.h>
 #include <ContextBase.h>
-#include <LocThread.h>
 
 namespace loc_core {
-
-class SystemStatus;
 
 class LocDualContext : public ContextBase {
     static const MsgTask* mMsgTask;
@@ -48,7 +45,6 @@ class LocDualContext : public ContextBase {
                                      const char* name, bool joinable = true);
     static const MsgTask* getMsgTask(const char* name, bool joinable = true);
     static pthread_mutex_t mGetLocContextMutex;
-    static SystemStatus* mSystemStatus;
 
 protected:
     LocDualContext(const MsgTask* msgTask,
@@ -73,7 +69,6 @@ public:
     }
 
     static void injectFeatureConfig(ContextBase *context);
-    static SystemStatus* getSystemStatus(void);
 };
 
 }

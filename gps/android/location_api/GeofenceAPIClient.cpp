@@ -1,4 +1,4 @@
-/* Copyright (c) 2017, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,7 +27,7 @@
  *
  */
 
-#define LOG_NDDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "LocSvc_GeofenceApiClient"
 
 #include <log_util.h>
@@ -39,9 +39,11 @@
 namespace android {
 namespace hardware {
 namespace gnss {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
+using ::android::hardware::gnss::V1_0::IGnssGeofenceCallback;
+using ::android::hardware::gnss::V1_0::GnssLocation;
 
 GeofenceAPIClient::GeofenceAPIClient(const sp<IGnssGeofenceCallback>& callback) :
     LocationAPIClientBase(),
@@ -50,6 +52,7 @@ GeofenceAPIClient::GeofenceAPIClient(const sp<IGnssGeofenceCallback>& callback) 
     LOC_LOGD("%s]: (%p)", __FUNCTION__, &callback);
 
     LocationCallbacks locationCallbacks;
+    memset(&locationCallbacks, 0, sizeof(LocationCallbacks));
     locationCallbacks.size = sizeof(LocationCallbacks);
 
     locationCallbacks.trackingCb = nullptr;
@@ -157,7 +160,7 @@ void GeofenceAPIClient::onGeofenceBreachCb(GeofenceBreachNotification geofenceBr
 
             auto r = mGnssGeofencingCbIface->gnssGeofenceTransitionCb(
                     geofenceBreachNotification.ids[i], gnssLocation, transition,
-                    static_cast<GnssUtcTime>(geofenceBreachNotification.timestamp));
+                    static_cast<V1_0::GnssUtcTime>(geofenceBreachNotification.timestamp));
             if (!r.isOk()) {
                 LOC_LOGE("%s] Error from gnssGeofenceTransitionCb description=%s",
                     __func__, r.description().c_str());
@@ -266,7 +269,7 @@ void GeofenceAPIClient::onResumeGeofencesCb(size_t count, LocationError* errors,
 }
 
 }  // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_1
 }  // namespace gnss
 }  // namespace hardware
 }  // namespace android

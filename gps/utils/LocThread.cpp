@@ -29,7 +29,7 @@
 #include <LocThread.h>
 #include <string.h>
 #include <pthread.h>
-#include <platform_lib_macros.h>
+#include <loc_pla.h>
 
 class LocThreadDelegate {
     LocRunnable* mRunnable;
@@ -65,7 +65,7 @@ public:
 // threashold approprietly for destroy(), e.g. mRefCount.
 LocThreadDelegate::LocThreadDelegate(LocThread::tCreate creator,
         const char* threadName, LocRunnable* runnable, bool joinable) :
-    mRunnable(runnable), mJoinable(joinable), mThandle(NULL),
+    mRunnable(runnable), mJoinable(joinable), mThandle((pthread_t)NULL),
     mMutex(PTHREAD_MUTEX_INITIALIZER), mRefCount(2) {
 
     // set up thread name, if nothing is passed in
@@ -79,7 +79,7 @@ LocThreadDelegate::LocThreadDelegate(LocThread::tCreate creator,
         mThandle = creator(threadName, threadMain, this);
     } else if (pthread_create(&mThandle, NULL, threadMain, this)) {
         // pthread_create() failed
-        mThandle = NULL;
+        mThandle = (pthread_t)NULL;
     }
 
     if (mThandle) {

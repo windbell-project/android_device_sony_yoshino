@@ -26,16 +26,15 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-#define LOG_NDDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "LocSvc_DualCtx"
 
 #include <cutils/sched_policy.h>
 #include <unistd.h>
 #include <LocDualContext.h>
 #include <msg_q.h>
-#include <platform_lib_log_util.h>
+#include <log_util.h>
 #include <loc_log.h>
-#include <SystemStatus.h>
 
 namespace loc_core {
 
@@ -57,7 +56,6 @@ const MsgTask* LocDualContext::mMsgTask = NULL;
 ContextBase* LocDualContext::mFgContext = NULL;
 ContextBase* LocDualContext::mBgContext = NULL;
 ContextBase* LocDualContext::mInjectContext = NULL;
-SystemStatus* LocDualContext::mSystemStatus = NULL;
 // the name must be shorter than 15 chars
 const char* LocDualContext::mLocationHalName = "Loc_hal_worker";
 #ifndef USE_GLIB
@@ -96,6 +94,7 @@ ContextBase* LocDualContext::getLocFgContext(LocThread::tCreate tCreator,
     if(NULL == mInjectContext) {
         LOC_LOGD("%s:%d]: mInjectContext is FgContext", __func__, __LINE__);
         mInjectContext = mFgContext;
+        injectFeatureConfig(mInjectContext);
     }
     pthread_mutex_unlock(&LocDualContext::mGetLocContextMutex);
 
@@ -120,6 +119,7 @@ ContextBase* LocDualContext::getLocBgContext(LocThread::tCreate tCreator,
     if(NULL == mInjectContext) {
         LOC_LOGD("%s:%d]: mInjectContext is BgContext", __func__, __LINE__);
         mInjectContext = mBgContext;
+        injectFeatureConfig(mInjectContext);
     }
     pthread_mutex_unlock(&LocDualContext::mGetLocContextMutex);
 
@@ -132,25 +132,19 @@ ContextBase* LocDualContext::getLocBgContext(LocThread::tCreate tCreator,
 
 void LocDualContext :: injectFeatureConfig(ContextBase *curContext)
 {
-    LOC_LOGd("Calling LBSProxy (%p) to inject feature config",
-             ((LocDualContext *)mInjectContext)->mLBSProxy);
-    ((LocDualContext *)mInjectContext)->mLBSProxy->injectFeatureConfig(curContext);
+    LOC_LOGD("%s:%d]: Enter", __func__, __LINE__);
+    if(curContext == mInjectContext) {
+        LOC_LOGD("%s:%d]: Calling LBSProxy (%p) to inject feature config",
+                 __func__, __LINE__, ((LocDualContext *)mInjectContext)->mLBSProxy);
+        ((LocDualContext *)mInjectContext)->mLBSProxy->injectFeatureConfig(curContext);
+    }
+    LOC_LOGD("%s:%d]: Exit", __func__, __LINE__);
 }
 
 LocDualContext::LocDualContext(const MsgTask* msgTask,
                                LOC_API_ADAPTER_EVENT_MASK_T exMask) :
     ContextBase(msgTask, exMask, mLBSLibName)
 {
-}
-
-SystemStatus* LocDualContext::getSystemStatus(void)
-{
-    pthread_mutex_lock(&LocDualContext::mGetLocContextMutex);
-    if (NULL == mSystemStatus) {
-        mSystemStatus = new SystemStatus();
-    }
-    pthread_mutex_unlock(&LocDualContext::mGetLocContextMutex);
-    return  mSystemStatus;
 }
 
 }
