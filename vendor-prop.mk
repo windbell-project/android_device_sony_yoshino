@@ -4,61 +4,32 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
-    af.fast_track_multiplier=2 \
+    af.fast_track_multiplier=1 \
     vendor.audio_hal.period_size=192 \
     audio.offload.video=true \
-    audio.offload.pcm.16bit.enable=true \
-    audio.offload.pcm.24bit.enable=true \
     audio.deep_buffer.media=true \
     audio.cts.media=false \
     audio.offload.min.duration.secs=30 \
-    persist.dirac.acs.controller=qem \
-    ro.dirac.acs.storeSettings=1 \
-    ro.dirac.ignore_error=1
+    audio.sony.effect.use.proxy=true \
+    av.offload.enable=true \
+    ro.af.client_heap_size_kbyte=7168
 
 # Audio new
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio_hal.period_size=192 \
-    ro.vendor.audio.sdk.fluencetype=fluencepro \
-    persist.vendor.audio.fluence.voicecall=true \
-    persist.vendor.audio.fluence.voicerec=true \
-    persist.vendor.audio.fluence.speaker=true \
-    vendor.audio.tunnel.encode=false \
-    persist.vendor.audio.ras.enabled=false \
-    vendor.audio.offload.buffer.size.kb=32 \
-    vendor.audio.offload.track.enable=true \
-    vendor.voice.path.for.pcm.voip=true \
-    vendor.audio.offload.multiaac.enable=true \
-    vendor.audio.dolby.ds2.enabled=false \
-    vendor.audio.dolby.ds2.hardbypass=false \
-    vendor.audio.offload.multiple.enabled=true \
-    vendor.audio.offload.passthrough=false \
     ro.vendor.audio.sdk.ssr=false \
-    vendor.audio.offload.gapless.enabled=true \
-    vendor.audio.safx.pbe.enabled=true \
-    vendor.audio.parser.ip.buffer.size=0 \
-    vendor.audio.flac.sw.decoder.24bit=true \
-    persist.vendor.bt.a2dp_offload_cap=false \
-    vendor.audio.use.sw.alac.decoder=true \
-    vendor.audio.use.sw.ape.decoder=true \
-    vendor.audio.hw.aac.encoder=true \
     vendor.fm.a2dp.conc.disabled=true \
-    vendor.audio.noisy.broadcast.delay=600 \
     ro.config.media_vol_steps=25
-
-# Battery
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cutoff_voltage_mv=3200
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     bt.max.hfpclient.connections=1 \
     persist.bt.a2dp_offload_cap=false \
-    qcom.bluetooth.soc=cherokee \
     ro.bluetooth.a4wp=false \
     ro.bluetooth.emb_wp_mode=true \
     ro.bluetooth.wipower=true \
-    ro.bt.bdaddr_path=/data/misc/bluetooth/bdaddr
+    ro.bt.bdaddr_path=/data/misc/bluetooth/bdaddr \
+    vendor.qcom.bluetooth.soc=cherokee
 
 # Cabl
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -66,29 +37,23 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.oneplus.camera,com.android.camera,org.mokee.snap \
-    persist.camera.mobicat=2 \
-    persist.camera.stats.debugexif=3080192 \
-    persist.ts.rtmakeup=false
-
-# CNE
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.cne.feature=1
-
-# Core control
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.qti.core_ctl_min_cpu=2 \
-    ro.vendor.qti.core_ctl_max_cpu=4
+    camera.disable_zsl_mode=1 \
+    camera.disable_rtt=1 \
+    persist.ts.rtmakeup=false \
 
 # Data
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.use_data_netmgrd=true \
+    ro.vendor.use_data_netmgrd=true \
     persist.data.netmgrd.qos.enable=true \
-    persist.data.mode=concurrent
+    persist.vendor.data.mode=concurrent
+
+# Debug switch
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.debug.coresight.config=none
 
 # DPM
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.dpm.feature=11
+    persist.vendor.dpm.feature=1
 
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -101,18 +66,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=420 \
+    debug.sf.enable_hwc_vds=1 \
     debug.sf.hw=1 \
+    debug.sf.latch_unsignaled=1 \
     debug.gralloc.enable_fb_ubwc=1 \
-    debug.gralloc.gfx_ubwc_disable=0 \
     dev.pm.dyn_samplingrate=1 \
     persist.demo.hdmirotationlock=false \
     ro.opengles.version=196610 \
     sdm.debug.disable_skip_validate=1 \
-    sdm.perf_hint_window=0 \
+    sdm.disable_hdr_lut_gen=1 \
+    sdm.perf_hint_window=50 \
     persist.debug.wfd.enable=1 \
     persist.sys.force_sw_gles=0 \
     persist.sys.wfd.virtual=0 \
-    persist.hwc.enable_vds=1
+    persist.hwc.enable_vds=1 \
+    qemu.hw.mainkeys=0
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -126,12 +94,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     mm.enable.smoothstreaming=true \
     persist.mm.enable.prefetch=true \
     vidc.enc.dcvs.extra-buff-count=2 \
-    persist.media.treble_omx=true
+    persist.media.treble_omx=true \
+    vendor.vidc.enc.disable.pq=true
+
+# Network
+PRODUCT_PROPERTY_OVERRIDES += \
+    net.qtaguid_enabled=1
 
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.nfc.port=I2C \
     ro.hardware.nfc_nci=nqx.default \
+    nfc.rf_la_disabled=false \
     persist.nfc.smartcard.config=SIM1,eSE1
 
 # Perf
@@ -160,25 +134,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ril.subscription.types=NV,RUIM \
     DEVICE_PROVISIONED=1 \
     ro.telephony.default_network=22,20 \
-    telephony.lteOnCdmaDevice=1 \
+    telephony.lteOnCdmaDevice=0 \
     keyguard.no_require_sim=true \
     ro.com.android.dataroaming=true \
+    persist.ims.disableUserAgent=1 \
     persist.sys.oem_smooth=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.VT_CAM_INTERFACE=1 \
-    persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.multisim.config=dsds \
-    persist.radio.enhance_ecall=true \
-    persist.radio.hw_mbn_update=0 \
-    persist.radio.sw_mbn_update=0 \
-    persist.radio.start_ota_daemon=0 \
-    persist.vendor.radio.custom_ecc=1 \
-    persist.vendor.radio.data_con_rprt=1 \
-    persist.vendor.radio.data_ltd_sys_ind=1 \
-    persist.vendor.radio.ignore_dom_time=10 \
-    persist.vendor.radio.rat_on=combine \
-    persist.vendor.radio.sib16_support=1
+    persist.radio.oem_socket=true \
+    persist.radio.wait_for_pbm=1 \
+    persist.radio.wifi_disc_delay=2 \
+    persist.vendor.radio.multisim.config=dsds
 
 # RmNet Data
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -191,7 +158,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.df.mux_count=8 \
     persist.data.df.iwlan_mux=9 \
     persist.data.df.dev_name=rmnet_usb0 \
-    persist.data.iwlan.enable=true
+    persist.vendor.data.iwlan.enable=true
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -200,11 +167,55 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.sensors.sta_detect=true \
     ro.vendor.sensors.mot_detect=true \
     ro.vendor.sensors.dpc=true \
-    ro.vendor.sensors.multishake=true
+    ro.vendor.sensors.multishake=true \
+    ro.sony.qf_use_report_period=false \
+    ro.sony.sdk.sensors.gestures=false \
+    ro.sony.sensors.amd=false \
+    ro.sony.sensors.bte=false \
+    ro.sony.sensors.cmc=false \
+    ro.sony.sensors.dev_ori=true \
+    ro.sony.sensors.dpc=false \
+    ro.sony.sensors.facing=false \
+    ro.sony.sensors.fast_amd=false \
+    ro.sony.sensors.fns=false \
+    ro.sony.sensors.game_rv=true \
+    ro.sony.sensors.georv=true \
+    ro.sony.sensors.gravity=true \
+    ro.sony.sensors.gtap=false \
+    ro.sony.sensors.iod=false \
+    ro.sony.sensors.laccel=true \
+    ro.sony.sensors.mot_detect=true \
+    ro.sony.sensors.multishake=false \
+    ro.sony.sensors.orientation=true \
+    ro.sony.sensors.pam=false \
+    ro.sony.sensors.pedometer=false \
+    ro.sony.sensors.pmd=false \
+    ro.sony.sensors.proximity=true \
+    ro.sony.sensors.pug=false \
+    ro.sony.sensors.qheart=false \
+    ro.sony.sensors.qmd=false \
+    ro.sony.sensors.rawdata_mode=false \
+    ro.sony.sensors.rmd=false \
+    ro.sony.sensors.rotvec=true \
+    ro.sony.sensors.scrn_ortn=false \
+    ro.sony.sensors.smd=true \
+    ro.sony.sensors.sta_detect=true \
+    ro.sony.sensors.step_counter=true \
+    ro.sony.sensors.step_detector=true \
+    ro.sony.sensors.tap=false \
+    ro.sony.sensors.tilt=false \
+    ro.sony.sensors.tilt_detector=true \
+    ro.sony.sensors.vmd=false \
+    ro.sony.sensors.wrist_tilt=false \
+    ro.sony.sensors.wu=true
 
 # Timeservice
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true
+
+# Thermal
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.thermal=somc
 
 # USB
 PRODUCT_PROPERTY_OVERRIDES += \
