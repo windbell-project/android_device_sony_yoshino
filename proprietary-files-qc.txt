@@ -254,7 +254,7 @@ vendor/lib64/hw/gatekeeper.msm8998.so
 # GPS
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
 -vendor/lib/libloc_api_v02.so
--vendor/lib64/libloc_api_v02.so
+-vendor/lib64/libloc_api_v02.so|0e770d2f290d3b28ab7fffd2b5e678a10b0feb72
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
@@ -319,8 +319,8 @@ vendor/lib64/libgdtap.so
 vendor/lib64/libgeofence.so
 vendor/lib64/libizat_client_api.so
 vendor/lib64/libizat_core.so
-vendor/lib64/liblbs_core.so
-vendor/lib64/libloc_ds_api.so
+vendor/lib64/liblbs_core.so|34e9c575ca9a438a48c6219b9c0df71f80bb8bd7
+vendor/lib64/libloc_ds_api.so|52ef0de954cc66e0abdd5806849cf33bdacf0944
 vendor/lib64/libloc_externalDr.so
 vendor/lib64/liblocationservice.so
 vendor/lib64/liblocationservice_glue.so
@@ -372,37 +372,37 @@ vendor/lib64/libllvm-qcom.so
 vendor/lib64/librs_adreno.so
 vendor/lib64/librs_adreno_sha1.so
 
-# Graphics - DRM - LA.UM.6.4.r1-07400-8x98.0
-vendor/lib/libsdedrm.so|e8b2700c95c94e79412049536c84e2d0b4ce58bd
-vendor/lib64/libsdedrm.so|96c6693b1ff69cd7fe6ab5cb04e67f4e0ea792bb
+# Graphics - DRM
+vendor/lib/libsdedrm.so
+vendor/lib64/libsdedrm.so
 
-# Graphics - HDR - LA.UM.6.4.r1-07400-8x98.0
-vendor/lib/libhdr_tm.so|9f191fda6909c92b29ac15c3d2cbf65c2db94b13
-vendor/lib64/libhdr_tm.so|9a61ddbece993d3329d337265f7be5278c237833
+# Graphics - HDR
+vendor/lib/libhdr_tm.so
+vendor/lib64/libhdr_tm.so
 
-# Graphics - SDM - LA.UM.6.4.r1-07400-8x98.0
-lib/vendor.qti.hardware.qdutils_disp@1.0.so|04bf21220673630ebaa4c8e7a84adbcdcf08f0dc
-lib/vendor.display.color@1.0.so|7ca706d322a38084ea2e6b103efe1acd33183400
-lib/vendor.display.postproc@1.0.so|a710a9d7f93892961ff71420fe222add0bfcf57e
-lib64/vendor.qti.hardware.qdutils_disp@1.0.so|d101774878c0374ad805d964c3d00c71b44456d9
-lib64/vendor.display.color@1.0.so|25c717f3004a5932dcbb2f55d5165c010f7eac1a
-lib64/vendor.display.postproc@1.0.so|503ef07fcfbbfcd8db096de79dfd822c8ada5e9b
--vendor/lib/libsdm-disp-vndapis.so|fc41b9e6c877a77e665d5766984aa1639ab167f4
--vendor/lib64/libsdm-disp-vndapis.so|4e936b7cbc00bb05381d03b70c8c53e377676bb3
-vendor/bin/hw/vendor.display.color@1.0-service|fec0d808fa0b795bf3afe8cad8afa06dcc3bf6e1
-vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti|dc6ff7d6bdb4bd7ee248eb03e4b1e53bd04f8221
+# Graphics - SDM
+lib/vendor.qti.hardware.qdutils_disp@1.0.so
+lib/vendor.display.color@1.0.so
+lib/vendor.display.postproc@1.0.so
+lib64/vendor.qti.hardware.qdutils_disp@1.0.so
+lib64/vendor.display.color@1.0.so
+lib64/vendor.display.postproc@1.0.so
+-vendor/lib/libsdm-disp-vndapis.so
+-vendor/lib64/libsdm-disp-vndapis.so
+vendor/bin/hw/vendor.display.color@1.0-service
+vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti
 vendor/etc/init/vendor.display.color@1.0-service.rc
 vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc
-vendor/lib/libqseed3.so|952f805ba6166e2c24fc8c21b9500ba7cbae1296
-vendor/lib/libsdm-color.so|2a265d34873f3d02bed7641640e84ea75edb977a
-vendor/lib/libsdm-diag.so|ac8b0130258ab08354cedfca89f73fb063e67290
-vendor/lib/libsdmextension.so|c8bd2bc2c4f94f409446c0ac1b5f39e63dfeae4b
-vendor/lib/libtinyxml2_1.so|3ee768813f5b351b71bd7dd2367b13a3698a591a
-vendor/lib64/libqseed3.so|c329dff9bdd75304ce559c5d07348046d7966a01
-vendor/lib64/libsdm-color.so|864ba48cda7279a7c2bb07ce9182bd4417dec4ff
-vendor/lib64/libsdm-diag.so|0e5be5803c36ed004724be97553f5ae18a1f24de
-vendor/lib64/libsdmextension.so|be02dd004708b621e1fc639a51b6bcffb2c1c60d
-vendor/lib64/libtinyxml2_1.so|5ffb12fd2162910fc95be463fcde04ab5c427045
+vendor/lib/libqseed3.so
+vendor/lib/libsdm-color.so
+vendor/lib/libsdm-diag.so
+vendor/lib/libsdmextension.so
+vendor/lib/libtinyxml2_1.so
+vendor/lib64/libqseed3.so
+vendor/lib64/libsdm-color.so
+vendor/lib64/libsdm-diag.so
+vendor/lib64/libsdmextension.so
+vendor/lib64/libtinyxml2_1.so
 
 # Improvetouch
 vendor/bin/hbtp_daemon
@@ -540,7 +540,7 @@ etc/permissions/telephonyservice.xml
 framework/QtiTelephonyServicelibrary.jar
 framework/embmslibrary.jar
 framework/qcrilhook.jar
-framework/qti-telephony-common.jar|4baabece52f7b1220d8e308f6cb8480a9a72d932
+framework/qti-telephony-common.jar
 framework/vendor.qti.data.factory-V1.0-java.jar
 framework/vendor.qti.hardware.data.dynamicdds-V1.0-java.jar
 lib/vendor.qti.hardware.data.dynamicdds@1.0.so
