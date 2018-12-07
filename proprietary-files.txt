@@ -502,6 +502,25 @@ vendor/etc/sensors/sensor_def_qcomdev.conf
 vendor/etc/sensors/sensor_def_somc_product.conf
 vendor/etc/sensors/sensor_def_somc_platform.conf
 
+# Sony camera app
+-app/CameraExtensionPermission-release/CameraExtensionPermission-release.apk
+-app/CameraAddonPermission-release/CameraAddonPermission-release.apk
+-app/CameraCommonPermission-release/CameraCommonPermission-release.apk
+-app/ImageProcessorPermission-release/ImageProcessorPermission-release.apk
+etc/permissions/com.sonymobile.camera.addon.xml
+etc/permissions/com.sonymobile.imageprocessor.xml
+framework/com.qualcomm.qti.camera.jar
+framework/com.sonymobile.camera.addon_impl.jar
+framework/com.sonymobile.imageprocessor.bypasscamera_impl.jar
+lib/libimageprocessorjni.so
+lib64/libimageprocessorjni.so
+-priv-app/CameraCommon/CameraCommon.apk
+-priv-app/ArtFilterCamera-xxhdpi-release/ArtFilterCamera-xxhdpi-release.apk
+-priv-app/TimeShiftCamera-release/TimeShiftCamera-release.apk
+-priv-app/CameraPanorama-release/CameraPanorama-release.apk
+-priv-app/SemcCameraUI-xxhdpi-release/SemcCameraUI-xxhdpi-release.apk
+-priv-app/SoundPhotoCamera-xxhdpi-release/SoundPhotoCamera-xxhdpi-release.apk
+
 # SOMC: idd
 bin/idds
 etc/init/idds.rc
