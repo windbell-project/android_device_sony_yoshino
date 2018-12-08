@@ -141,7 +141,7 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4 \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
     vendor.qti.hardware.camera.device@1.0 \
