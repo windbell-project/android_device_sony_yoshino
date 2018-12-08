@@ -408,7 +408,9 @@ PRODUCT_COPY_FILES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-service.mokee
+    android.hardware.vibrator@1.0-service \
+    android.hardware.vibrator@1.0-impl \
+    vibrator.default
 
 # VNDK
 PRODUCT_PACKAGES += \
