@@ -201,16 +201,14 @@ PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
     android.hardware.gatekeeper@1.0-service
 
-# GPS / Location
+# GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.1-impl-qti \
     libgnss \
-    libgnsspps \
-    libgps.utils \
-    liblocation_api \
-    libloc_core \
-    libloc_pla \
-    libvehiclenetwork-native
+    libgnsspps
+
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl-qti:64 \
+    android.hardware.gnss@1.0-service-qti
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/apdr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/apdr.conf \
