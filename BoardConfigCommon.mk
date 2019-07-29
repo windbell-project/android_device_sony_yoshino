@@ -288,7 +288,6 @@ WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 WIFI_DRIVER_MODULE_PATH := "/vendor/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "wlan"
-WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 
 # inherit from the proprietary version
 -include vendor/sony/yoshino/BoardConfigVendor.mk
