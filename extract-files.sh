@@ -74,7 +74,6 @@ function fix_vendor () {
 # Camera
 fix_vendor etc lib/libmmcamera_imglib.so
 fix_vendor etc lib/libmmcamera_interface.so
-fix_vendor etc lib/libopcamera_native_modules.so
 
 # Fingerprint sensor
 fix_vendor framework etc/permissions/com.fingerprints.extension.xml
